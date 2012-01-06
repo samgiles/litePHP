@@ -1,7 +1,7 @@
 <?php
 /**
- * 
- * @author user
+ * This class is designed to use a database to authenticate a user.
+ * @author Samuel Giles
  *
  */
 class DBAuth implements Authenticate {
@@ -25,10 +25,9 @@ class DBAuth implements Authenticate {
 		$this->_additionalConditions = $additionalConditions;
 	}
 	
-	public function authenticate($identity, $credential){
+	public function authenticate($identity, $credential) {
+		
 		// Authenticate the user using the DB.
-		
-		
 		if (isset($_SESSION['auth']) ){
 			$session = $_SESSION['auth'];
 			if ($session->getIdentity() === $identity){
@@ -38,12 +37,7 @@ class DBAuth implements Authenticate {
 			}
 		} 
 		
-		// Build an SQL statement
-		$sqlStatement = "SELECT * FROM $this->_table WHERE $this->_identity == '$identity'";
-		
-		foreach ($this->_additionalConditions as $condition) {
-			$sqlStatement .= " $condition";  // The space separates the conditions in the built sql.
-		}
+		$sqlStatement = $this->buildSqlStatement($this->_table, $this->_identity, $identity, $this->_additionalConditions);
 		
 		$pdo = Database::getHandle();
 		$pdostatement= $pdo->prepare($sqlStatement);
@@ -51,7 +45,7 @@ class DBAuth implements Authenticate {
 		
 		$row = $pdostatement->fetch(PDO::FETCH_ASSOC);
 		
-		if ($row[$this->_credential] == $credential){
+		if ($row[$this->_credential] === $credential){
 			// Create a session_auth storage
 			$sessionStore = new session_auth("auth", $identity, array ( 'time' => time() ));
 		} else {
@@ -59,5 +53,16 @@ class DBAuth implements Authenticate {
 		}
 		
 		return $sessionStore !== null;
+	}
+	
+	protected function buildSqlStatement($table, $identityFieldname, $identity, $conditions) {
+		// Build an SQL statement
+		$sqlStatement = "SELECT * FROM $this->_table WHERE $identityFielname == '$identity'";
+		
+		foreach ($this->_additionalConditions as $condition) {
+			$sqlStatement .= " $condition";  // The space separates the conditions in the built sql.
+		}
+		
+		return $sqlStatement;
 	}
 }
