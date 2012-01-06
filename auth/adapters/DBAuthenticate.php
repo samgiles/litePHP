@@ -4,7 +4,7 @@
  * @author Samuel Giles
  *
  */
-class DBAuth implements Authenticate {
+class DBAuthenticate implements Authenticate {
 
 	protected $_table;
 	protected $_identity;
