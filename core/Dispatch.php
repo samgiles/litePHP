@@ -21,31 +21,36 @@ class Dispatch {
 		
 	}
 	
+	/**
+	 * Dispatches a REST application.
+	 */
 	public static function rest(){
 		
 		$requestMethod = $_SERVER["REQUEST_METHOD"];
-		
-		
+		$uri = $_SERVER["REQUEST_URI"];
 		
 		switch ($requestMethod) {
 			case 'GET':
-				$dispatchValue = array("GET" => $_GET);
+				$dispatchValue = array("GET" => $_GET, "URI" => $uri);
 				break;
 			case 'HEAD':
-				$dispatchValue = array("HEAD" => $_GET);
+				$dispatchValue = array("HEAD" => $_GET, "URI" => $uri);
 				break;
 			case 'POST':
-				$dispatchValue = array("POST" => $_POST);
+				$dispatchValue = array("POST" => $_POST, "URI" => $uri);
 				break;
 			case 'DELETE':
-				$dispatchValue = array("DELETE" => "");
+				$dispatchValue = array("DELETE" => "", "URI" => $uri);
 				break;
 			case 'PUT':
 				$_PUT = array();
 				parse_str(file_get_contents('php://input'), $_PUT);
-				$dispatchValue = array("PUT" => $_PUT);
+				$dispatchValue = array("PUT" => $_PUT, "URI" => $uri);
 				break;
 			default:
+				// Method not allowed
+				header("HTTP/1.1 405 Method Not Allowed");
+				header("Allow: GET, HEAD, POST, DELETE, PUT");
 		}
 	}
 }
