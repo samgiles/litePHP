@@ -4,7 +4,7 @@
  */
 
 // Set up the include paths.
-$path = dirname(__FILE__) . "/../liteFramework" . PATH_SEPARATOR . dirname(__FILE__) . "/models" . PATH_SEPARATOR . dirname(__FILE__) . "/controllers";
+$path = dirname(__FILE__) . "/../auth" . PATH_SEPARATOR . dirname(__FILE__) . "/../db" . PATH_SEPARATOR . dirname(__FILE__) . "/../session" . PATH_SEPARATOR . dirname(__FILE__) . "/../rest";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 // Include the AutoLoad function.
@@ -16,4 +16,4 @@ ini_set('display_errors', 1);
 /*
  * Run the application.
  */
-Application::run();
+Application::run(true);

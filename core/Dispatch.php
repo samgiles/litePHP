@@ -52,5 +52,7 @@ class Dispatch {
 				header("HTTP/1.1 405 Method Not Allowed");
 				header("Allow: GET, HEAD, POST, DELETE, PUT");
 		}
+		
+		return $dispatchValue;
 	}
 }

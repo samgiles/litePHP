@@ -7,8 +7,8 @@ class HttpCodes {
 	 */
 	public static function get($code) {
 		
-		if (in_array($code, HttpCodes::_codes)){
-			return "HTTP/1.1 " . $code . " " . HttpCodes::_codes[$code];
+		if (in_array($code, HttpCodes::$_codes)){
+			return "HTTP/1.1 " . $code . " " . HttpCodes::$_codes[$code];
 		}
 		
 		return null;
