@@ -49,7 +49,7 @@ class Dispatch {
 				break;
 			default:
 				// Method not allowed
-				header("HTTP/1.1 405 Method Not Allowed");
+				header(HttpCodes::get(405));
 				header("Allow: GET, HEAD, POST, DELETE, PUT");
 		}
 		
