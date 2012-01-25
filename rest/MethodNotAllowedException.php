@@ -1,3 +1,3 @@
 <?php
-class MethodNotAllowedException extends Exception {
+class MethodNotAllowedException extends HttpException {
 }

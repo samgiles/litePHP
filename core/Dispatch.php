@@ -52,7 +52,8 @@ class Dispatch {
 				if (function_exists("http_response_code")){
 					http_response_code(405); // Using SVN version PHP
 				} else {
-					header(HttpCodes::get(405), true, 405);
+					header("status", true, 405); 	// Appears we can set the status code using this rather than explicitly setting the header, this makes the HttpCodes class redundant.
+													// Note, the first string needs to be none empty for the setting of the response code to work. php.net/manual/en/function.header.php
 				}
 				
 				header("Allow: GET, HEAD, POST, DELETE, PUT");

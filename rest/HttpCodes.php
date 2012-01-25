@@ -10,9 +10,9 @@ class HttpCodes {
 		
 		if (in_array($code, HttpCodes::$_codes)){
 			if (stristr(PHP_SAPI, 'cgi') == FALSE) {
-				return 'HTTP/1.1 ' . $code .  ' ' . HttpCodes::$_codes[$code];
+				return "HTTP/1.1 $code  {HttpCodes::$_codes[$code]}";
 			} else {
-				return "Status: " . $code . ' '. HttpCodes::$_codes[$code];
+				return "Status: $code  {HttpCodes::$_codes[$code]}";
 			}
 		}
 		
