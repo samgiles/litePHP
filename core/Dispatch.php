@@ -31,28 +31,38 @@ class Dispatch {
 		
 		switch ($requestMethod) {
 			case 'GET':
-				$dispatchValue = array("GET" => $_GET, "URI" => $uri);
+				$dispatchValue = array("type" => "GET", "GET" => $_GET, "URI" => $uri);
 				break;
 			case 'HEAD':
-				$dispatchValue = array("HEAD" => $_GET, "URI" => $uri);
+				$dispatchValue = array("type" => "HEAD","HEAD" => $_GET, "URI" => $uri);
 				break;
 			case 'POST':
-				$dispatchValue = array("POST" => $_POST, "URI" => $uri);
+				$dispatchValue = array("type" => "POST","POST" => $_POST, "URI" => $uri);
 				break;
 			case 'DELETE':
-				$dispatchValue = array("DELETE" => "", "URI" => $uri);
+				$dispatchValue = array("type" => "DELETE","DELETE" => "", "URI" => $uri);
 				break;
 			case 'PUT':
 				$_PUT = array();
 				parse_str(file_get_contents('php://input'), $_PUT);
-				$dispatchValue = array("PUT" => $_PUT, "URI" => $uri);
+				$dispatchValue = array("type" => "PUT","PUT" => $_PUT, "URI" => $uri);
 				break;
 			default:
 				// Method not allowed
-				header(HttpCodes::get(405));
+				if (function_exists("http_response_code")){
+					http_response_code(405); // Using SVN version PHP
+				} else {
+					header(HttpCodes::get(405), true, 405);
+				}
+				
 				header("Allow: GET, HEAD, POST, DELETE, PUT");
+				throw new MethodNotAllowedException("Invalid HTTP Method.");
 		}
 		
 		return $dispatchValue;
+	}
+	
+	private static function dispatchRest(array $initialValues) {
+		
 	}
 }

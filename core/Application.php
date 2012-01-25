@@ -12,7 +12,13 @@ class Application {
 	public static function run($rest){
 		
 		if ($rest) {
-			print_r(Dispatch::rest());
+			
+			try {
+				print_r(Dispatch::rest());
+			} catch (MethodNotAllowedException $e) {
+				
+			}
+			
 			return;
 		}
 		
