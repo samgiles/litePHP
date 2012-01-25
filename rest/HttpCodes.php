@@ -7,11 +7,16 @@ class HttpCodes {
 	 */
 	public static function get($code) {
 		
+		
 		if (in_array($code, HttpCodes::$_codes)){
-			return "HTTP/1.1 " . $code . " " . HttpCodes::$_codes[$code];
+			if (stristr(PHP_SAPI, 'cgi') == FALSE) {
+				return 'HTTP/1.1 ' . $code .  ' ' . HttpCodes::$_codes[$code];
+			} else {
+				return "Status: " . $code . ' '. HttpCodes::$_codes[$code];
+			}
 		}
 		
-		return null;
+		return "HttpCodeNotValid";
 	}
 	
 	private static $_codes = array(
