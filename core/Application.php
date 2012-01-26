@@ -14,11 +14,13 @@ class Application {
 		if ($rest) {
 			
 			try {
-				print_r(Dispatch::rest());
+				$restResource = Dispatch::rest();
 			} catch (MethodNotAllowedException $e) {
 				
 			}
 			
+			header('Content-Type: application/json');
+			echo $restResource->getRepresentation();
 			return;
 		}
 		

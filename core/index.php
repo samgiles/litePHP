@@ -4,7 +4,7 @@
  */
 
 // Set up the include paths.
-$path = dirname(__FILE__) . "/../auth" . PATH_SEPARATOR . dirname(__FILE__) . "/../db" . PATH_SEPARATOR . dirname(__FILE__) . "/../session" . PATH_SEPARATOR . dirname(__FILE__) . "/../rest";
+$path = dirname(__FILE__) . "/../auth" . PATH_SEPARATOR . dirname(__FILE__) . "/../db" . PATH_SEPARATOR . dirname(__FILE__) . "/../session" . PATH_SEPARATOR . dirname(__FILE__) . "/../rest" . PATH_SEPARATOR . dirname(__FILE__) . "/../example_api/collections" . PATH_SEPARATOR . dirname(__FILE__) . "/../example_api/";
 set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
 // Include the AutoLoad function.
