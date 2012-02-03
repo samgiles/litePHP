@@ -3,12 +3,16 @@
  * Maps a URI path to a Class.
  * @author Samuel Giles
  */
-class UriMapper {
-	public static function getRestResource($dispatchedValues) {
-		$result = pathinfo($dispatchedValues['URI']);
+class UriMapper extends RestUriMapper {
+	
+	public function getRestResource($dispatchedValues) {
 		
-		if ($result['basename'] == 'posts') {
+		
+		$result = split('/', trim($dispatchedValues['URI'], '/\\'));
+		
+		if ($result[3] == 'posts') {
 			return new Posts($dispatchedValues);
 		}
+		parent::getRestResource($dispatchedValues);
 	}
 }

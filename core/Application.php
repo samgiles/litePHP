@@ -15,8 +15,8 @@ class Application {
 			
 			try {
 				$restResource = Dispatch::rest();
-			} catch (MethodNotAllowedException $e) {
-				
+			} catch (HttpException $e) {
+				return;
 			}
 			
 			header('Content-Type: application/json');
