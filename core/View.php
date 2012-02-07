@@ -54,8 +54,4 @@ class View {
 		$path = dirname(__FILE__) . '/skins/' . $this->_skinName . '/content/' . $this->_contentName . '.phtml';
 		include ($path); 
 	}
-	
-	private function Url (UrlRules $rules){
-		return $rules->getUrl();
-	}
 }
