@@ -1,3 +1,7 @@
-AN EASY FRAMEWORK FOR BUILDING PHP APPLICATIONS.
+# Lite Framework For PHP
 
-CONTAINS AN AUTH API AND A SIMPLE MVC FRAMEWORK AND PDO DATABASE CONNECTOR S FAR
+This is designed to be a lightweight and fast framework for rapidly developing PHP web applications.
+
+It is in very early stages of development and is not anywhere near being complete.
+
+Take a look at 'http://code.google.com/p/collaborative-development-sem2' -> Live on 'http://uni.sam-giles.co.uk/c=Index' for an example of this framework in use.
