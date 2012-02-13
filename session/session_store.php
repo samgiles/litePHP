@@ -13,4 +13,6 @@ class session_store {
 	 */
 	protected $_key;
 	
+	public function __construct() {
+	}
 }

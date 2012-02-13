@@ -42,6 +42,19 @@ class View {
 		}
 	}
 	
+	/**
+	 * Include another Controller.  This allows you to create modules and then use the modules separately.
+	 * @param unknown_type $controllerName The name of the controller to indclude.
+	 * @param unknown_type $requestArray The request parameters to pass to the controller, this would be the same as what might appear in the query string if directly calling the Controller.
+	 */
+	public function includeController($controllerName, $requestArray) {
+		$requests = array_merge(array('c' => $controllerName), $requestArray);
+		$controller = Dispatch::get($requests, array());
+		
+		$view = new View($controller);
+		$view->render();
+	} 
+	
 	/** 
 	 * Renders the View.
 	 */

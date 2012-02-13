@@ -5,7 +5,7 @@ class Database {
 	 
 	 public static function GetHandle(){
 	 	if (is_null(Database::$_this)){
-	 		Database::$_this = new Database('${db.host}', '${db.name}', '${db.uname}', 'db.password');
+	 		Database::$_this = new Database('', '', '', '');
 	 	}
 	 	
 	 	return Database::$_this->getAHandle();

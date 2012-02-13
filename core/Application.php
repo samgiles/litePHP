@@ -5,31 +5,20 @@
  */
 class Application {
 	
-	protected static $_view;
-	protected static $_controller;
+	protected $_view;
+	protected $_controller;
 	
-
-	public static function run($rest){
-		
-		if ($rest) {
-			
-			try {
-				$restResource = Dispatch::rest();
-			} catch (HttpException $e) {
-				return;
-			}
-			
-			header('Content-Type: application/json');
-			echo $restResource->getRepresentation();
-			return;
-		}
-		
+	private function __construct() {
 		// Dispatch the application.
-		Application::$_controller = Dispatch::get($_GET, $_POST);
+		$this->$_controller = Dispatch::get($_GET, $_POST);
 		
 		// Create a view from the controller association.
 		$this->_view = new View($this->_controller);
-		$this->_view->render();
+	}
+
+	public static function run(){
+		$app = new Application();
+		$app->_view->render();
 	}
 	
 }

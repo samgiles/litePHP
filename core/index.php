@@ -3,10 +3,13 @@
  * This is the index file for the framework.  It provides an entry point to the application.
  */
 
-// Set up the include paths.
-$path = dirname(__FILE__) . "/../auth" . PATH_SEPARATOR . dirname(__FILE__) . "/../db" . PATH_SEPARATOR . dirname(__FILE__) . "/../session" . PATH_SEPARATOR . dirname(__FILE__) . "/../rest" . PATH_SEPARATOR . dirname(__FILE__) . "/../example_api/collections" . PATH_SEPARATOR . dirname(__FILE__) . "/../example_api/";
-set_include_path(get_include_path() . PATH_SEPARATOR . $path);
+$dn = dirname(__FILE__);
 
+$psdn = PATH_SEPARATOR . $dn; // Path separator and dn
+
+// Set up the include paths.
+$path = $dn . '/../auth' . $psdn . '/../db' . $psdn . '/../session' . $psdn . '/controllers'  . $psdn . '/models';
+set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 // Include the AutoLoad function.
 require_once ("AutoLoad.php");
 
